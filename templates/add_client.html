@@ -4,6 +4,15 @@
 
 {% block body %}
 
+{% if messages %}
+  {% for message in messages %}
+    <div class="alert {% if message.tags == 'error' %}alert-danger{% elif message.tags == 'success' %}alert-success{% elif message.tags == 'warning' %}alert-warning{% else %}alert-info{% endif %} alert-dismissible fade show" role="alert">
+      <strong>{{ message.tags }}:</strong> {{ message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  {% endfor %}
+{% endif %}
+
 <section>
     <div class="container py-5 ">
         <form method="post">
@@ -16,54 +25,54 @@
 
                     <!-- Text input -->
                     <div data-mdb-input-init class="form-outline mb-4">
-                        <input type="text" id="form6Example3" class="form-control" />
+                        <input type="text" id="form6Example3" class="form-control" name="client_comp_name" required />
                         <label class="form-label" for="form6Example3">Client/Company Name </label>
                     </div>
 
                     <div data-mdb-input-init class="form-outline mb-4">
-                        <input type="text" id="form6Example1" class="form-control" />
+                        <input type="text" id="form6Example1" class="form-control" name="client_gst" required />
                         <label class="form-label" for="form6Example1">GST Number</label>
                     </div>
 
                     <!-- Number input -->
                     <div data-mdb-input-init class="form-outline mb-4">
-                        <input type="number" id="form6Example6" class="form-control" />
+                        <input type="number" id="form6Example6" class="form-control" name="client_phone" required />
                         <label class="form-label" for="form6Example6">Phone </label>
                     </div>
 
                     <!-- Number input -->
                     <div data-mdb-input-init class="form-outline mb-4">
-                        <input type="email" id="form6Example2" class="form-control" />
+                        <input type="email" id="form6Example2" class="form-control" name="client_email" required />
                         <label class="form-label" for="form6Example2">Email</label>
                     </div>
 
                     <!-- Country input -->
                     <div data-mdb-input-init class="form-outline mb-4">
-                        <input type="text" id="form6Example5" class="form-control" />
+                        <input type="text" id="form6Example5" class="form-control" name="client_country" value="{{client_country | default:'India'}}" required />
                         <label class="form-label" for="form6Example5">Country</label>
                     </div>
 
                     <!-- State input -->
                     <div data-mdb-input-init class="form-outline mb-4">
-                        <input type="text" id="form6Example8" class="form-control" />
+                        <input type="text" id="form6Example8" class="form-control" name="client_state" required />
                         <label class="form-label" for="form6Example8">State</label>
                     </div>
 
-                    <!-- Text input -->
-                    <div data-mdb-input-init class="form-outline mb-4">
-                        <input type="text" id="form6Example4" class="form-control" />
+                    
+                    <!-- <div data-mdb-input-init class="form-outline mb-4">
+                        <input type="text" id="form6Example4" class="form-control"  />
                         <label class="form-label" for="form6Example4">Address</label>
-                    </div>
+                    </div> -->
 
                     <!-- Pin input -->
                     <div data-mdb-input-init class="form-outline mb-4">
-                        <input type="number" id="form6Example9" class="form-control" />
-                        <label class="form-label" for="form6Example9">Pin</label>
+                        <input type="number" id="form6Example9" class="form-control" name="client_pin" required />
+                        <label class="form-label" for="form6Example9">Pin Code</label>
                     </div>
 
                     <!-- Message input -->
                     <div data-mdb-input-init class="form-outline mb-4">
-                        <textarea class="form-control" id="form6Example7" rows="2"></textarea>
+                        <textarea class="form-control" id="form6Example7" rows="4" name="client_other_info" required></textarea>
                         <label class="form-label" for="form6Example7">Full Address/Other Info.</label>
                     </div>
 
@@ -74,48 +83,48 @@
                     <h4 class="alert alert-secondary text-center">Add Service Provider Details</h4>
 
                     <div data-mdb-input-init class="form-outline mb-4">
-                        <input type="text" id="form6Example11" class="form-control" />
+                        <input type="text" id="form6Example11" class="form-control" name="provider_comp_name" value="{{provider_comp_name | default:'xyz company'}}" required />
                         <label class="form-label" for="form6Example11">Company/Provider Name</label>
                     </div>
 
                     <div data-mdb-input-init class="form-outline mb-4">
-                        <input type="text" id="form6Example12" class="form-control" />
+                        <input type="text" id="form6Example12" class="form-control" name="provider_name" value="{{ provider_name|default:'John Wick' }}" required />
                         <label class="form-label" for="form6Example12">Handle By</label>
-                    </div>
+                    </div>                    
 
                     <div data-mdb-input-init class="form-outline mb-4">
-                        <input type="number" id="form6Example13" class="form-control" />
+                        <input type="text" id="form6Example13" class="form-control" name="provider_acc_no" value="{{ provider_acc_no|default:061000098765 }}" required />
                         <label class="form-label" for="form6Example13">Bank Account No.</label>
-                    </div>
+                    </div>                    
 
                     <div data-mdb-input-init class="form-outline mb-4">
-                        <input type="text" id="form6Example14" class="form-control" />
+                        <input type="text" id="form6Example14" class="form-control" name="provider_bank_name" value="{{provider_bank_name | default:'xyz bank'}}" required />
                         <label class="form-label" for="form6Example14">Bank Name</label>
                     </div>
 
                     <div data-mdb-input-init class="form-outline mb-4">
-                        <input type="text" id="form6Example15" class="form-control" />
+                        <input type="text" id="form6Example15" class="form-control" name="provider_ifsc" value="{{provider_ifsc | default:'ABC00005'}}" required />
                         <label class="form-label" for="form6Example15">IFSC Code</label>
                     </div>
 
                     <div data-mdb-input-init class="form-outline mb-4">
-                        <input type="text" id="form6Example16" class="form-control" />
+                        <input type="text" id="form6Example16" class="form-control" name="provider_gst" value="{{provider_gst | default:'GST12345X'}}" required />
                         <label class="form-label" for="form6Example16">GST Number</label>
                     </div>
 
                     <div data-mdb-input-init class="form-outline mb-4">
-                        <input type="number" id="form6Example17" class="form-control" />
+                        <input type="number" id="form6Example17" class="form-control" name="provider_phone" value="{{provider_phone | default:'9076543210'}}" required />
                         <label class="form-label" for="form6Example17">Phone No.</label>
                     </div>
 
                     <div data-mdb-input-init class="form-outline mb-4">
-                        <input type="email" id="form6Example18" class="form-control" />
+                        <input type="email" id="form6Example18" class="form-control" name="provider_mail" value="{{provider_mail | default:'example@gmail.com'}}" />
                         <label class="form-label" for="form6Example18">Email</label>
                     </div>
 
                     <!-- Message input -->
                     <div data-mdb-input-init class="form-outline mb-4">
-                        <textarea class="form-control" id="form6Example19" rows="2"></textarea>
+                        <textarea class="form-control" id="form6Example19" rows="2" name="provider_other_info" >{{provider_other_info | default:'Building No.4, xyz street, India'}}</textarea>
                         <label class="form-label" for="form6Example19">Full Address/Other Info.</label>
                     </div>
 
