@@ -5,12 +5,15 @@
 {% block body %}
 
 {% if messages %}
-  {% for message in messages %}
-    <div class="alert {% if message.tags == 'error' %}alert-danger{% elif message.tags == 'success' %}alert-success{% elif message.tags == 'warning' %}alert-warning{% else %}alert-info{% endif %} alert-dismissible fade show" role="alert">
-      <strong>{{ message.tags }}:</strong> {{ message }}
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-  {% endfor %}
+{% for message in messages %}
+
+<div class="m-2 alert {% if message.tags == 'error' %}alert-danger{% elif message.tags == 'success' %}alert-success{% elif message.tags == 'warning' %}alert-warning{% else %}alert-info{% endif %} alert-dismissible fade show"
+    role="alert">
+    <strong>{{ message.tags }}:</strong> {{ message }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+{% endfor %}
 {% endif %}
 
 <section>
@@ -54,7 +57,7 @@
 
                     <!-- State input -->
                     <div data-mdb-input-init class="form-outline mb-4">
-                        <input type="text" id="form6Example8" class="form-control" name="client_state" required />
+                        <input type="text" id="form6Example8" class="form-control" name="client_state" value="{{client_state | default:'Delhi NCR'}}" required />
                         <label class="form-label" for="form6Example8">State</label>
                     </div>
 
@@ -93,7 +96,7 @@
                     </div>                    
 
                     <div data-mdb-input-init class="form-outline mb-4">
-                        <input type="text" id="form6Example13" class="form-control" name="provider_acc_no" value="{{ provider_acc_no|default:061000098765 }}" required />
+                        <input type="number" id="form6Example13" class="form-control" name="provider_acc_no" />
                         <label class="form-label" for="form6Example13">Bank Account No.</label>
                     </div>                    
 
@@ -136,6 +139,53 @@
         </form>
     </div>
 </section>
+
+<hr class="bg-white">
+
+<section>
+    <div class="container py-2">
+        <div class="card">
+            <div class="card-body">
+                <h6 class="card-title text-warning text-uppercase text-center">Brief Details Of Client & Service Provider</h6>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <ul class="list-unstyled">
+                            <li class="card-text text-white"><b class="text-warning">Client: </b>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt, dicta .</li>
+                            
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <ul class="list-unstyled">
+                            <li class="card-text text-white"><b class="text-warning">Client: </b>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt, dicta .</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <!-- <a href="#" class="btn btn-warning" data-mdb-ripple-init>Edit <i class="fas fa-pen"></i></a>
+                    <a href="#" class="btn btn-danger" data-mdb-ripple-init>Delete <i class="fas fa-times"></i></a> -->
+                    <div class="dropdown">
+                        <button
+                          class="btn btn-light dropdown-toggle"
+                          type="button"
+                          id="dropdownMenuButton"
+                          data-mdb-dropdown-init
+                          data-mdb-ripple-init
+                          aria-expanded="false"
+                        >
+                          More Action
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                          <li><a class="dropdown-item text-warning" href="#">Edit <i class="far fa-edit"></i></a></li>
+                          <li><a class="dropdown-item text-danger" href="#">Delete <i class="fas fa-times"></i></a></li>
+                          <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                      </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 
 
 {% endblock body %}
