@@ -1,0 +1,139 @@
+{% extends "base.html" %}
+
+{% block title %}Update Client{% endblock title %}
+
+{% block body %}
+
+<section>
+    <div class="container py-5 ">
+        <form method="post">
+            {% csrf_token %}
+            <div class="row d-flex">
+
+                <div class="col-md-12 col-lg-6 mb-4 px-4">
+
+                    <h4 class="alert alert-warning text-center">Edit Client Details</h4>
+
+                    <!-- Text input -->
+                    <div data-mdb-input-init class="form-outline mb-4">
+                        <input type="text" id="formExample3" class="form-control" name="client_comp_name" minlength="5" value="{{obj_to_edit.client_comp_name}}" />
+                        <label class="form-label" for="formExample3">Client/Company Name </label>
+                    </div>
+
+                    <div data-mdb-input-init class="form-outline mb-4">
+                        <input type="text" id="formExample1" class="form-control" name="client_gst" minlength="15" maxlength="15" value="{{obj_to_edit.client_gst}}" required />
+                        <label class="form-label" for="formExample1">GST Number</label>
+                    </div>
+
+                    <!-- Number input -->
+                    <div data-mdb-input-init class="form-outline mb-4">
+                        <input type="number" id="formExample6" class="form-control" name="client_phone" value="{{obj_to_edit.client_phone}}" />
+                        <label class="form-label" for="formExample6">Phone No.</label>
+                    </div>
+
+                    <!-- Number input -->
+                    <div data-mdb-input-init class="form-outline mb-4">
+                        <input type="email" id="formExample2" class="form-control" name="client_email" minlength="12" value="{{obj_to_edit.client_email}}" />
+                        <label class="form-label" for="formExample2">Email</label>
+                    </div>
+
+                    <!-- Country input -->
+                    <div data-mdb-input-init class="form-outline mb-4">
+                        <input type="text" id="formExample5" class="form-control" name="client_country" value="{{obj_to_edit.client_country}}" required />
+                        <label class="form-label" for="formExample5">Country</label>
+                    </div>
+
+                    <!-- State input -->
+                    <div data-mdb-input-init class="form-outline mb-4">
+                        <input type="text" id="formExample8" class="form-control" name="client_state" value="{{obj_to_edit.client_state}}" minlength="3" required />
+                        <label class="form-label" for="formExample8">State</label>
+                    </div>
+
+                    <!-- Pin input -->
+                    <div data-mdb-input-init class="form-outline mb-4">
+                        <input type="number" id="formExample9" class="form-control" name="client_pin" value="{{obj_to_edit.client_pin}}" required />
+                        <label class="form-label" for="formExample9">Pin Code</label>
+                    </div>
+
+                    <!-- Message input -->
+                    <div data-mdb-input-init class="form-outline mb-4">
+                        <textarea class="form-control" id="formExample7" rows="4" name="client_other_info" required>{{obj_to_edit.client_other_info}}</textarea>
+                        <label class="form-label" for="formExample7">Full Address/Other Info.</label>
+                    </div>
+
+                </div>
+
+                <div class="col-md-12 col-lg-6 mb-4 px-4">
+
+                    <h4 class="alert alert-warning text-center">Edit Service Provider Details</h4>
+
+                    <div data-mdb-input-init class="form-outline mb-4">
+                        <input type="text" id="formExample11" class="form-control" name="provider_comp_name" value="{{obj_to_edit.provider_comp_name}}" minlength="5" required />
+                        <label class="form-label" for="formExample11">Company/Provider Name</label>
+                    </div>
+
+                    <div data-mdb-input-init class="form-outline mb-4">
+                        <input type="text" id="formExample12" class="form-control" name="provider_name" value="{{obj_to_edit.provider_name}}" required />
+                        <label class="form-label" for="formExample12">Handle By</label>
+                    </div>                    
+
+                    <div data-mdb-input-init class="form-outline mb-4">
+                        <input type="number" id="formExample13" class="form-control" name="provider_acc_no" value="{{obj_to_edit.provider_acc_no}}"  />
+                        <label class="form-label" for="formExample13">Bank Account No.</label>
+                    </div>                    
+
+                    <div data-mdb-input-init class="form-outline mb-4">
+                        <input type="text" id="formExample14" class="form-control" name="provider_bank_name" value="{{obj_to_edit.provider_bank_name}}" minlength='3' required />
+                        <label class="form-label" for="formExample14">Bank Name</label>
+                    </div>
+
+                    <div data-mdb-input-init class="form-outline mb-4">
+                        <input type="text" id="formExample15" class="form-control" name="provider_ifsc" value="{{obj_to_edit.provider_ifsc}}" required />
+                        <label class="form-label" for="formExample15">IFSC Code</label>
+                    </div>
+
+                    <div data-mdb-input-init class="form-outline mb-4">
+                        <input type="text" id="formExample16" class="form-control" name="provider_gst" value="{{obj_to_edit.provider_gst}}" minlength="15" maxlength="15" required />
+                        <label class="form-label" for="formExample16">GST Number</label>
+                    </div>
+
+                    <div data-mdb-input-init class="form-outline mb-4">
+                        <input type="number" id="formExample17" class="form-control" name="provider_phone" value="{{obj_to_edit.provider_phone}}" required />
+                        <label class="form-label" for="formExample17">Phone No.</label>
+                    </div>
+
+                    <div data-mdb-input-init class="form-outline mb-4">
+                        <input type="email" id="formExample18" class="form-control" name="provider_mail" value="{{obj_to_edit.provider_mail}}" required minlength="12" />
+                        <label class="form-label" for="formExample18">Email</label>
+                    </div>
+
+                    <!-- Message input -->
+                    <div data-mdb-input-init class="form-outline mb-4">
+                        <textarea class="form-control" id="formExample19" rows="2" name="provider_other_info" >{{obj_to_edit.provider_other_info}}</textarea>
+                        <label class="form-label" for="formExample19">Full Address/Other Info.</label>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <button data-mdb-ripple-init type="submit" class="btn btn-warning btn-block fw-bold">
+                            Submit Details <i class="fas fa-paper-plane ml-2"></i>
+                        </button>
+                    </div>
+                    <div class="col-md-6">
+                        <a data-mdb-ripple-init href="{% url 'add-client' %}" class="btn btn-danger btn-block fw-bold">
+                            Go Back <i class="fas fa-undo ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                
+
+                
+
+            </div>
+        </form>
+    </div>
+</section>
+
+{% endblock body %}

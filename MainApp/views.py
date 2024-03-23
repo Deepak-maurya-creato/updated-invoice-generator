@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect,HttpResponse
+from django.shortcuts import render,redirect,HttpResponse, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
@@ -109,5 +109,55 @@ def add_client(request):
             
         except Exception as e:
             messages.error(request, f'Error occurred: {str(e)}')
+        
+    try:
+        all_client_provide = ClientServiceProvider.objects.all()[::-1]
+    except ClientServiceProvider.DoesNotExist:
+        all_client_provide = None
+    
+    context = {"all_client_provide":all_client_provide}
 
-    return render(request, 'add_client.html')
+    return render(request, 'add_client.html', context)
+
+
+def edit_client_provider(request, pk):
+    obj_to_edit = get_object_or_404(ClientServiceProvider, pk=pk)
+    
+    if request.method == "POST":
+        # Update the object with the posted data
+        obj_to_edit.client_comp_name = request.POST.get('client_comp_name')
+        obj_to_edit.client_gst = request.POST.get('client_gst')
+        obj_to_edit.client_phone = request.POST.get('client_phone')
+        obj_to_edit.client_email = request.POST.get('client_email')
+        obj_to_edit.client_country = request.POST.get('client_country')
+        obj_to_edit.client_state = request.POST.get('client_state')
+        obj_to_edit.client_pin = request.POST.get('client_pin')
+        obj_to_edit.client_other_info = request.POST.get('client_other_info')
+        
+        obj_to_edit.provider_comp_name = request.POST.get('provider_comp_name')
+        obj_to_edit.provider_name = request.POST.get('provider_name')
+        obj_to_edit.provider_acc_no = request.POST.get('provider_acc_no')
+        obj_to_edit.provider_bank_name = request.POST.get('provider_bank_name')
+        obj_to_edit.provider_ifsc = request.POST.get('provider_ifsc')
+        obj_to_edit.provider_gst = request.POST.get('provider_gst')
+        obj_to_edit.provider_phone = request.POST.get('provider_phone')
+        obj_to_edit.provider_mail = request.POST.get('provider_mail')
+        obj_to_edit.provider_other_info = request.POST.get('provider_other_info')
+        
+        obj_to_edit.save()
+        
+        return redirect('add-client')  # Redirect to the desired URL after successful update
+    
+    return render(request, 'edit_client.html', {"obj_to_edit": obj_to_edit})
+        
+
+def delete_client_provider(request, pk):
+    try:
+        obj_to_delete = get_object_or_404(ClientServiceProvider, pk=pk)
+        obj_to_delete.delete()
+        messages.success(request, 'Record deleted successfully !')
+        return redirect('/add-client/')
+    except:
+        messages.error(request, 'Record not deleted !')
+        return redirect('/add-client/')
+
