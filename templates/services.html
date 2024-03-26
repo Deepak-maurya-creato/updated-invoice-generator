@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block title %}Add Client{% endblock title %}
+
+{% block body %}
+
+{% if messages %}
+{% for message in messages %}
+
+<div class="m-2 alert {% if message.tags == 'error' %}alert-danger{% elif message.tags == 'success' %}alert-success{% elif message.tags == 'warning' %}alert-warning{% else %}alert-info{% endif %} alert-dismissible fade show"
+    role="alert">
+    <strong>{{ message.tags }}:</strong> {{ message }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+{% endfor %}
+{% endif %}
+
+
+<section>
+    <div class="container py-5">
+        <form method="post" action="">
+            {% csrf_token %}
+
+            <div class="row">
+
+                <!-- First Column -->
+                <div class="col-md-12 col-lg-6 mb-4 px-4">
+
+                    <!-- Assign To -->
+                    <div data-mdb-input-init class="form-outline mb-4">
+                        <label class="form-label" for="{{ form.assigne_to.id_for_label }}">{{ form.assigne_to.label }}</label>
+                        {{ form.assigne_to }}
+                    </div>
+
+                    <!-- Service Description -->
+                    <div data-mdb-input-init class="form-outline mb-4">
+                        <label class="form-label" for="{{ form.service_description.id_for_label }}">{{ form.service_description.label }}</label>
+                        {{ form.service_description }}
+                    </div>
+
+                </div>
+
+                <!-- Second Column -->
+                <div class="col-md-12 col-lg-6 mb-4 px-4">
+
+                    <!-- Amount -->
+                    <div data-mdb-input-init class="form-outline mb-4">
+                        <label class="form-label" for="{{ form.amount.id_for_label }}">{{ form.amount.label }}</label>
+                        {{ form.amount }}
+                    </div>
+
+                    <!-- Quantity -->
+                    <div data-mdb-input-init class="form-outline mb-4">
+                        <label class="form-label" for="{{ form.quantity.id_for_label }}">{{ form.quantity.label }}</label>
+                        {{ form.quantity }}
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Submit and Go Back Buttons -->
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <button type="submit" class="btn btn-warning btn-block fw-bold">
+                        Submit <i class="fas fa-paper-plane ml-2"></i>
+                    </button>
+                </div>
+                <div class="col-md-6">
+                    <a href="#" class="btn btn-danger btn-block fw-bold">
+                        Go Back <i class="fas fa-undo ml-2"></i>
+                    </a>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</section>
+
+
+
+{% endblock body %}

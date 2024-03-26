@@ -25,6 +25,16 @@
                         <label class="form-label" for="formExample1">GST Number</label>
                     </div>
 
+                    <div data-mdb-input-init class="form-outline mb-4">
+                        <input type="number" id="newigstExample1" class="form-control" name="client_igst" value="{{obj_to_edit.client_igst}}" required />
+                        <label class="form-label" for="newigstExample1">IGST (default payable 9%)</label>
+                    </div>
+                    
+                    <div data-mdb-input-init class="form-outline mb-4">
+                        <input type="number" id="newsgstExample1" class="form-control" name="client_sgst" value="{{obj_to_edit.client_sgst}}" required />
+                        <label class="form-label" for="newsgstExample1">SGST (default payable 9%)</label>
+                    </div> 
+
                     <!-- Number input -->
                     <div data-mdb-input-init class="form-outline mb-4">
                         <input type="number" id="formExample6" class="form-control" name="client_phone" value="{{obj_to_edit.client_phone}}" />
@@ -49,15 +59,9 @@
                         <label class="form-label" for="formExample8">State</label>
                     </div>
 
-                    <!-- Pin input -->
-                    <div data-mdb-input-init class="form-outline mb-4">
-                        <input type="number" id="formExample9" class="form-control" name="client_pin" value="{{obj_to_edit.client_pin}}" required />
-                        <label class="form-label" for="formExample9">Pin Code</label>
-                    </div>
-
                     <!-- Message input -->
                     <div data-mdb-input-init class="form-outline mb-4">
-                        <textarea class="form-control" id="formExample7" rows="4" name="client_other_info" required>{{obj_to_edit.client_other_info}}</textarea>
+                        <textarea class="form-control" id="formExample7" rows="2" name="client_other_info" required>{{obj_to_edit.client_other_info}}</textarea>
                         <label class="form-label" for="formExample7">Full Address/Other Info.</label>
                     </div>
 

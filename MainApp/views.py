@@ -5,7 +5,7 @@ from django.core.exceptions import ValidationError
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .models import *
-
+from .forms import ServicesForm
 
 # Create your views here.
 def login_view(request):
@@ -40,11 +40,12 @@ def add_client(request):
         try:
             client_comp_name = request.POST.get('client_comp_name')
             client_gst = request.POST.get('client_gst')
+            client_igst = request.POST.get('client_igst')
+            client_sgst = request.POST.get('client_sgst')
             client_phone = request.POST.get('client_phone')
             client_email = request.POST.get('client_email')
             client_country = request.POST.get('client_country')
             client_state = request.POST.get('client_state')
-            client_pin = request.POST.get('client_pin')
             client_other_info = request.POST.get('client_other_info')
 
             provider_comp_name = request.POST.get('provider_comp_name')
@@ -55,7 +56,7 @@ def add_client(request):
             provider_gst = request.POST.get('provider_gst')
             provider_phone = request.POST.get('provider_phone')
             provider_mail = request.POST.get('provider_mail')
-            provider_other_info  = request.POST.get('provider_other_info')
+            provider_other_info = request.POST.get('provider_other_info')
 
             # Custom validations
             if len(client_comp_name) < 5 or len(provider_comp_name) < 5:
@@ -66,10 +67,10 @@ def add_client(request):
 
             if len(str(client_phone)) != 10 or len(provider_phone) != 10:
                 raise ValueError('Phone No. should contain 10 digit.')
-            
-            if len(str(client_pin)) != 6:
-                raise ValueError('Zip Code should contain 6 digit.')
-            
+
+            if int(client_igst) < 0 or int(client_sgst) < 0 or (int(client_igst) + int(client_sgst)) > 18:
+                raise ValueError('Invalid GST value.')
+
             if len(str(client_gst)) != 15 or len(str(provider_gst)) != 15:
                 raise ValueError('GST Number should contain 15 digit.')
 
@@ -81,11 +82,12 @@ def add_client(request):
             client_service_provider = ClientServiceProvider(
                 client_comp_name=client_comp_name,
                 client_gst=client_gst,
+                client_igst=client_igst,
+                client_sgst=client_sgst,
                 client_phone=client_phone,
                 client_email=client_email,
                 client_country=client_country,
                 client_state=client_state,
-                client_pin=client_pin,
                 client_other_info=client_other_info,
                 provider_comp_name=provider_comp_name,
                 provider_name=provider_name,
@@ -106,18 +108,19 @@ def add_client(request):
 
         except ValueError as e:
             messages.error(request, f'Validation error: {e}')
-            
+
         except Exception as e:
             messages.error(request, f'Error occurred: {str(e)}')
-        
+
     try:
         all_client_provide = ClientServiceProvider.objects.all()[::-1]
     except ClientServiceProvider.DoesNotExist:
         all_client_provide = None
-    
-    context = {"all_client_provide":all_client_provide}
+
+    context = {"all_client_provide": all_client_provide}
 
     return render(request, 'add_client.html', context)
+
 
 
 def edit_client_provider(request, pk):
@@ -127,11 +130,12 @@ def edit_client_provider(request, pk):
         # Update the object with the posted data
         obj_to_edit.client_comp_name = request.POST.get('client_comp_name')
         obj_to_edit.client_gst = request.POST.get('client_gst')
+        obj_to_edit.client_igst = request.POST.get('client_igst')
+        obj_to_edit.client_sgst = request.POST.get('client_sgst')
         obj_to_edit.client_phone = request.POST.get('client_phone')
         obj_to_edit.client_email = request.POST.get('client_email')
         obj_to_edit.client_country = request.POST.get('client_country')
         obj_to_edit.client_state = request.POST.get('client_state')
-        obj_to_edit.client_pin = request.POST.get('client_pin')
         obj_to_edit.client_other_info = request.POST.get('client_other_info')
         
         obj_to_edit.provider_comp_name = request.POST.get('provider_comp_name')
@@ -160,4 +164,16 @@ def delete_client_provider(request, pk):
     except:
         messages.error(request, 'Record not deleted !')
         return redirect('/add-client/')
+    
+
+def assigne_services(request):
+    if request.method == 'POST':
+        form = ServicesForm(request.POST)
+        if form.is_valid():
+            form.save()
+            # Handle successful form submission
+    else:
+        form = ServicesForm()
+
+    return render(request, 'services.html',  {'form': form})
 

@@ -4,11 +4,12 @@ class ClientServiceProvider(models.Model):
     # Client details
     client_comp_name = models.CharField(max_length=120)
     client_gst = models.CharField(max_length=50)
+    client_igst = models.SmallIntegerField()
+    client_sgst = models.SmallIntegerField()
     client_phone = models.CharField(max_length=20)
     client_email = models.EmailField()
     client_country = models.CharField(max_length=50)
     client_state = models.CharField(max_length=50)
-    client_pin = models.CharField(max_length=20)
     client_other_info = models.TextField()
 
     # Service provider details
@@ -25,4 +26,16 @@ class ClientServiceProvider(models.Model):
     created_at = models.DateTimeField(auto_now_add = True)
 
     def __str__(self):
-        return f"Client Name/Company: {self.client_comp_name} - Provider: {self.provider_comp_name} - created_at: {self.created_at}"
+        return f"Client: {self.client_comp_name}, Id: {self.id}"
+    
+
+class Services(models.Model):
+
+    assigne_to = models.ForeignKey(ClientServiceProvider, on_delete=models.CASCADE)
+    service_description = models.CharField(max_length=150)
+    amount = models.DecimalField(max_digits=7, decimal_places=2)
+    quantity = models.SmallIntegerField(default=1)
+    created_at = models.DateTimeField(auto_now_add = True)
+
+    def __str__(self):
+        return f"{self.service_description} - {self.quantity}"
