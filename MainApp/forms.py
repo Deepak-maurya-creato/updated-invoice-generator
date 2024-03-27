@@ -6,8 +6,8 @@ class ServicesForm(forms.ModelForm):
         model = Services
         fields = ['assigne_to', 'service_description', 'amount', 'quantity']
         widgets = {
-            'assigne_to': forms.Select(attrs={'class': 'form-select'}),
-            'service_description': forms.TextInput(attrs={'class': 'form-control border'}),
+            'assigne_to': forms.Select(attrs={'class': 'form-select bg-dark text-white'}),
+            'service_description': forms.Textarea(attrs={'class': 'form-control border', 'rows': '4'}),
             'amount': forms.NumberInput(attrs={'class': 'form-control border', 'step': '0.01'}),
             'quantity': forms.NumberInput(attrs={'class': 'form-control border', 'step': '1'}),
         }

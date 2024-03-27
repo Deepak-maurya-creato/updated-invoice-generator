@@ -8,4 +8,5 @@ urlpatterns = [
     path('edit-client-and-provider/<int:pk>/', views.edit_client_provider, name='edit_client_provider'),
     path('delete-client-and-provider/<int:pk>/', views.delete_client_provider, name='delete-client'),
     path('assigne-client-services/', views.assigne_services, name='assigne_services'),
+    path('create-services/', views.create_services, name='create-services'),
 ]

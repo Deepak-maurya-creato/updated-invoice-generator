@@ -1,0 +1,50 @@
+<form hx-post="{% url 'create-services' %}" hx-trigger="click from:#submit-all">
+    {% csrf_token %}
+
+    <div class="row border py-2 shadow">
+
+        <!-- First Column -->
+        <div class="col-md-12 col-lg-6 mb-4 px-4">
+
+            <!-- Assign To -->
+            <div data-mdb-input-init class="form-outline mb-4">
+                <label class="form-label" for="{{ form.assigne_to.id_for_label }}">{{ form.assigne_to.label }}</label>
+                {{ form.assigne_to }}
+            </div>
+
+            <!-- Service Description -->
+            <div data-mdb-input-init class="form-outline mb-4">
+                <label class="form-label" for="{{ form.service_description.id_for_label }}">{{ form.service_description.label }}</label>
+                {{ form.service_description }}
+            </div>
+
+        </div>
+
+        <!-- Second Column -->
+        <div class="col-md-12 col-lg-6 mb-4 px-4">
+
+            <!-- Amount -->
+            <div data-mdb-input-init class="form-outline mb-4">
+                <label class="form-label" for="{{ form.amount.id_for_label }}">{{ form.amount.label }}</label>
+                {{ form.amount }}
+            </div>
+
+            <!-- Quantity -->
+            <div data-mdb-input-init class="form-outline mb-4">
+                <label class="form-label" for="{{ form.quantity.id_for_label }}">{{ form.quantity.label }}</label>
+                {{ form.quantity }}
+            </div>
+
+            <div  class="form-outline mb-4">
+                <button type="button" class="btn btn-danger fw-bold" hx-on="click: this.closest('form').remove()">
+                    Cancel <i class="fas fa-times ml-2"></i>
+                </button>
+            </div>
+            
+
+        </div>
+
+    </div>
+
+
+</form>

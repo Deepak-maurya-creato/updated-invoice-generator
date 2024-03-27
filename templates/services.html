@@ -19,62 +19,19 @@
 
 <section>
     <div class="container py-5">
-        <form method="post" action="">
-            {% csrf_token %}
 
-            <div class="row">
+        <h4 class="alert alert-secondary text-center">Assigne Services To Client</h4>
 
-                <!-- First Column -->
-                <div class="col-md-12 col-lg-6 mb-4 px-4">
+        <div id="services-form">
+            {% include 'services_form.html' %}
+        </div>
 
-                    <!-- Assign To -->
-                    <div data-mdb-input-init class="form-outline mb-4">
-                        <label class="form-label" for="{{ form.assigne_to.id_for_label }}">{{ form.assigne_to.label }}</label>
-                        {{ form.assigne_to }}
-                    </div>
+        <div class="my-2">
+            <button type="button" class="btn btn-info" data-mdb-ripple-init hx-get="{% url 'create-services' %}" hx-target="#services-form" hx-swap="beforeend">+ Add More</button>
 
-                    <!-- Service Description -->
-                    <div data-mdb-input-init class="form-outline mb-4">
-                        <label class="form-label" for="{{ form.service_description.id_for_label }}">{{ form.service_description.label }}</label>
-                        {{ form.service_description }}
-                    </div>
+            <button type="button" class="btn btn-light" data-mdb-ripple-init data-mdb-ripple-color="dark" id="submit-all">Submit All</button>
 
-                </div>
-
-                <!-- Second Column -->
-                <div class="col-md-12 col-lg-6 mb-4 px-4">
-
-                    <!-- Amount -->
-                    <div data-mdb-input-init class="form-outline mb-4">
-                        <label class="form-label" for="{{ form.amount.id_for_label }}">{{ form.amount.label }}</label>
-                        {{ form.amount }}
-                    </div>
-
-                    <!-- Quantity -->
-                    <div data-mdb-input-init class="form-outline mb-4">
-                        <label class="form-label" for="{{ form.quantity.id_for_label }}">{{ form.quantity.label }}</label>
-                        {{ form.quantity }}
-                    </div>
-
-                </div>
-
-            </div>
-
-            <!-- Submit and Go Back Buttons -->
-            <div class="row">
-                <div class="col-md-6 mb-3">
-                    <button type="submit" class="btn btn-warning btn-block fw-bold">
-                        Submit <i class="fas fa-paper-plane ml-2"></i>
-                    </button>
-                </div>
-                <div class="col-md-6">
-                    <a href="#" class="btn btn-danger btn-block fw-bold">
-                        Go Back <i class="fas fa-undo ml-2"></i>
-                    </a>
-                </div>
-            </div>
-
-        </form>
+        </div>
     </div>
 </section>
 

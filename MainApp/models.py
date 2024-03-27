@@ -32,7 +32,7 @@ class ClientServiceProvider(models.Model):
 class Services(models.Model):
 
     assigne_to = models.ForeignKey(ClientServiceProvider, on_delete=models.CASCADE)
-    service_description = models.CharField(max_length=150)
+    service_description = models.TextField()
     amount = models.DecimalField(max_digits=7, decimal_places=2)
     quantity = models.SmallIntegerField(default=1)
     created_at = models.DateTimeField(auto_now_add = True)

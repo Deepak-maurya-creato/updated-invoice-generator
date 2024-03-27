@@ -171,9 +171,20 @@ def assigne_services(request):
         form = ServicesForm(request.POST)
         if form.is_valid():
             form.save()
-            # Handle successful form submission
+            return redirect('/assigne-client-services/')
     else:
         form = ServicesForm()
 
     return render(request, 'services.html',  {'form': form})
+
+
+def create_services(request):
+    if request.method == 'POST':
+        form = ServicesForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Services successfully assigned.')
+            # return redirect('/assigne-client-services/')
+
+    return render(request, 'services_form.html', {'form':ServicesForm()})
 
